@@ -42,12 +42,12 @@ class AllCakes extends React.Component {
       }
     ]
     return (
-      <Columns>
+      <Columns style={{flexWrap: 'wrap'}}>
         <h3>HI </h3>
         {allCakes.map(cake => (
           <li>
             {cake.name}
-            <img src={cake.imageUrl} />
+            <img src={cake.imageUrl} className="allCakeImg" />
           </li>
         ))}
       </Columns>
