@@ -1,18 +1,105 @@
 'use strict'
 
 const db = require('../server/db')
-const {User} = require('../server/db/models')
+
+const Cake = require('../server/db/models/cakeProduct')
+const User = require('../server/db/models/user')
+const OrderedItems = require('../server/db/models/orderedItems')
+const Transaction = require('../server/db/models/transactions')
 
 async function seed() {
   await db.sync({force: true})
   console.log('db synced!')
 
-  const users = await Promise.all([
-    User.create({email: 'cody@email.com', password: '123'}),
-    User.create({email: 'murphy@email.com', password: '123'})
+  const cake = await Promise.all([
+    Cake.create({
+      name: 'I Like Big Bundts',
+      imageUrl:
+        'https://ichef.bbci.co.uk/food/ic/food_16x9_832/recipes/easy_chocolate_cake_31070_16x9.jpg',
+      price: 500,
+      description: 'This is a bad ass cake.',
+      ingredients: 'eggs, apples, sunshine'
+    }),
+    Cake.create({
+      name: 'All You Need is Cake',
+      imageUrl:
+        'https://ichef.bbci.co.uk/food/ic/food_16x9_832/recipes/easy_chocolate_cake_31070_16x9.jpg',
+      price: 500,
+      description: 'Cake is all you need',
+      ingredients: 'eggs, apples, sunshine'
+    }),
+    Cake.create({
+      name: 'Cake My Day',
+      imageUrl:
+        'https://ichef.bbci.co.uk/food/ic/food_16x9_832/recipes/easy_chocolate_cake_31070_16x9.jpg',
+      price: 500,
+      description: 'Do that one more time, cake my day',
+      ingredients: 'eggs, apples, sunshine'
+    }),
+    Cake.create({
+      name: 'Cake by the Ocean',
+      imageUrl:
+        'https://ichef.bbci.co.uk/food/ic/food_16x9_832/recipes/easy_chocolate_cake_31070_16x9.jpg',
+      price: 500,
+      description: 'I keep on hopin',
+      ingredients: 'eggs, apples, sunshine'
+    }),
+    Cake.create({
+      name: 'Birthday Cake',
+      imageUrl:
+        'https://ichef.bbci.co.uk/food/ic/food_16x9_832/recipes/easy_chocolate_cake_31070_16x9.jpg',
+      price: 500,
+      description: 'Oh na na, whats your name',
+      ingredients: 'eggs, apples, sunshine'
+    })
   ])
 
-  console.log(`seeded ${users.length} users`)
+  const user = await Promise.all([
+    User.create({
+      firstName: 'Susette',
+      lastName: 'Susette',
+      email: 'susette@hotmail.com',
+      password: 'adlkjfdafd13290',
+      salt: 'akdfjlaadffd243',
+      googleId: 'alkdjf',
+      address: '5 Hanover Sq NY NY 12345',
+      isAdmin: 'false'
+    }),
+    User.create({
+      firstName: 'Larry',
+      lastName: 'Susette',
+      email: 'lsusette@hotmail.com',
+      password: 'afdadlkjdf234',
+      salt: ';aefd;j;fda76',
+      googleId: 'oin9k',
+      address: '5 Hanover Sq NY NY 12345',
+      isAdmin: 'false'
+    }),
+    User.create({
+      firstName: 'Priyanka',
+      lastName: 'Garg',
+      email: 'priyanka@hotmail.com',
+      password: 'adkfjafdi876',
+      salt: 'jdifueae',
+      googleId: 'adkfjafdji',
+      address: '5 Hanover Sq NY NY 12345',
+      isAdmin: 'false'
+    })
+  ])
+
+  const transaction = await Promise.all([
+    Transaction.create({
+      status: 'open'
+    })
+  ])
+
+  const orderedItem = await Promise.all([
+    OrderedItems.create({
+      quantity: 5
+    })
+  ])
+
+  console.log(`seeded ${user.length} users`)
   console.log(`seeded successfully`)
 }
 
