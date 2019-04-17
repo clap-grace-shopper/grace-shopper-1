@@ -4,6 +4,7 @@ import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 
 import {Navbar} from './components'
 import Routes from './routes'
+import SingleCake from './components/singleCake'
 
 const App = () => {
   return (
@@ -13,6 +14,7 @@ const App = () => {
         <Routes />
         <Switch>
           <Route exact path="/cakes" component={AllCakes} />
+          <Route path="/cakes/:id" component={SingleCake} />
         </Switch>
       </div>
     </Router>
