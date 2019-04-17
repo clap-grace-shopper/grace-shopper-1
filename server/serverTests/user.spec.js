@@ -1,7 +1,7 @@
 /* global describe beforeEach it */
 
 const {expect} = require('chai')
-const db = require('../index')
+const db = require('../db/index')
 const User = db.model('user')
 
 describe('User model', () => {
@@ -15,8 +15,11 @@ describe('User model', () => {
 
       beforeEach(async () => {
         cody = await User.create({
+          firstName: 'Cody',
+          lastName: 'Cody',
           email: 'cody@puppybook.com',
-          password: 'bones'
+          password: 'bones',
+          address: '5 Hanover Sq'
         })
       })
 
