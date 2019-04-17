@@ -10,7 +10,7 @@ export const gotCakes = (cakes) => {
 
 //Thunks
 export const getCakes = () => async (dispatch) => {
-	const {data} = await axios.get('/cakes'); //change depending on route
+	const {data} = await axios.get('api/cakes'); //change depending on route
 	dispatch(gotCakes(data));
 };
 
@@ -24,7 +24,8 @@ const initialState = {
 export default (state = initialState, action) => {
 	switch (action.type) {
 		case GOT_CAKES:
-			return {...state, cakes: action.cakes};
+			console.log('in the reducer', action.cakes);
+			return action.cakes;
 		default:
 			return state;
 	}
