@@ -13,9 +13,10 @@ class AllCakes extends React.Component {
 	}
 
 	render() {
-		let allCakes = this.props.state.cakes;
-		console.log('what is this props', this.props);
-		return this.props.cakes ? (
+		let allCakes = this.props.state;
+
+		console.log('what is this props state', this.props.state); //cakes:[]
+		return allCakes.length > 0 ? (
 			<div>
 				<Columns style={{flexWrap: 'wrap'}} ismultiline="true">
 					{allCakes.map((cake) => (
@@ -26,10 +27,10 @@ class AllCakes extends React.Component {
 
 							<Columns>
 								<Columns.Column>{cake.name}</Columns.Column>
-								<Columns.Column>$19.99</Columns.Column>
+								<Columns.Column>${cake.price}</Columns.Column>
 							</Columns>
 							<Columns>
-								<Button>Purchase</Button>
+								<Button color="danger">Purchase</Button>
 							</Columns>
 						</Columns.Column>
 					))}
@@ -42,7 +43,7 @@ class AllCakes extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-	state: state
+	state: state.cakes
 });
 
 const mapDispatchToProps = (dispatch) => ({
