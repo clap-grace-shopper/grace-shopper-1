@@ -27,5 +27,8 @@ OrderedItems.belongsTo(Cake)
  * instead of: const User = require('../db/models/user')
  */
 module.exports = {
-  User
+  User,
+  Cake,
+  OrderedItems,
+  Transactions
 }
