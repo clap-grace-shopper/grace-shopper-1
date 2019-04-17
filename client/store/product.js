@@ -10,7 +10,9 @@ export const gotCakes = (cakes) => {
 
 //Thunks
 export const getCakes = () => async (dispatch) => {
-	const {data} = await axios.get('/cakes'); //change depending on route
+	console.log('is this working??');
+	const {data} = await axios.get('api/cakes'); //change depending on route
+	console.log('what is data??', data);
 	dispatch(gotCakes(data));
 };
 

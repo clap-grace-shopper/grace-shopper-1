@@ -4,44 +4,18 @@ import {getCakes} from '../store/product';
 import {Columns, Button} from 'react-bulma-components/full';
 
 class AllCakes extends React.Component {
+	constructor() {
+		super();
+	}
 	componentDidMount() {
-		// this.props.retrieveCakes()
+		this.props.retrieveCakes();
+		console.log('retrieve cakes');
 	}
 
 	render() {
-		const allCakes = [
-			{
-				name: 'Carrot Cake',
-				imageUrl:
-					'https://www.tasteofhome.com/wp-content/uploads/2017/10/Mint-Patty-Cake_exps140673_CMT2426390C08_17_2b_RMS-1.jpg'
-			},
-			{
-				name: 'Chocolate Cake',
-				imageUrl:
-					'https://www.tasteofhome.com/wp-content/uploads/2017/10/Mint-Patty-Cake_exps140673_CMT2426390C08_17_2b_RMS-1.jpg'
-			},
-			{
-				name: 'Red Velvet Cake',
-				imageUrl:
-					'https://www.tasteofhome.com/wp-content/uploads/2017/10/Mint-Patty-Cake_exps140673_CMT2426390C08_17_2b_RMS-1.jpg'
-			},
-			{
-				name: 'I like big bundts',
-				imageUrl:
-					'https://www.tasteofhome.com/wp-content/uploads/2017/10/Mint-Patty-Cake_exps140673_CMT2426390C08_17_2b_RMS-1.jpg'
-			},
-			{
-				name: 'Cake Day',
-				imageUrl:
-					'https://www.tasteofhome.com/wp-content/uploads/2017/10/Mint-Patty-Cake_exps140673_CMT2426390C08_17_2b_RMS-1.jpg'
-			},
-			{
-				name: 'ABCD',
-				imageUrl:
-					'https://www.tasteofhome.com/wp-content/uploads/2017/10/Mint-Patty-Cake_exps140673_CMT2426390C08_17_2b_RMS-1.jpg'
-			}
-		];
-		return (
+		let allCakes = this.props.state.cakes;
+		console.log('what is this props', this.props);
+		return this.props.cakes ? (
 			<div>
 				<Columns style={{flexWrap: 'wrap'}} ismultiline="true">
 					{allCakes.map((cake) => (
@@ -61,6 +35,8 @@ class AllCakes extends React.Component {
 					))}
 				</Columns>
 			</div>
+		) : (
+			'Loading'
 		);
 	}
 }
@@ -69,8 +45,8 @@ const mapStateToProps = (state) => ({
 	state: state
 });
 
-const mapDispatchToProps = () => {
-	() => dispatch(getCakes());
-};
+const mapDispatchToProps = (dispatch) => ({
+	retrieveCakes: () => dispatch(getCakes())
+});
 
-export default AllCakes;
+export default connect(mapStateToProps, mapDispatchToProps)(AllCakes);
