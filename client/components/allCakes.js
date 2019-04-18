@@ -32,7 +32,17 @@ class AllCakes extends React.Component {
               <Columns.Column>${cake.price}</Columns.Column>
             </Columns>
             <Columns>
-              <Button color="danger">Purchase</Button>
+              <Button
+                onClick={() =>
+                  localStorage.setItem(
+                    `${cake.name}`,
+                    JSON.stringify([cake.name, cake.price, cake.imageUrl, cake.id])
+                  )
+                }
+                color="danger"
+              >
+                Add to Cart
+              </Button>
             </Columns>
           </Columns.Column>
         ))}

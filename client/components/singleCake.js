@@ -15,6 +15,7 @@ class SingleCake extends React.Component {
   render() {
     let cake = this.props.state
     console.log('single cake props:', this.props.state)
+    console.log('localstorename:', localStorage)
     return (
       <Columns>
         <Columns.Column>
@@ -25,7 +26,17 @@ class SingleCake extends React.Component {
           <p>{cake.price}</p>
           <p>{cake.description}</p>
           <p>{cake.ingredients}</p>
-          <Button color="danger">Purchase</Button>
+          <Button
+            onClick={() =>
+              localStorage.setItem(
+                `${cake.name}`,
+                JSON.stringify([cake.name, cake.price, cake.imageUrl, cake.id])
+              )
+            }
+            color="danger"
+          >
+            Add to Cart
+          </Button>
         </Columns.Column>
       </Columns>
     )
