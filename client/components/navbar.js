@@ -20,8 +20,12 @@ const Navbar = ({handleClick, isLoggedIn}) => (
 		) : (
 			<Nav.Menu>
 				<Nav.Container>
-					<Nav.Item>Login</Nav.Item>
-					<Nav.Item>Sign Up</Nav.Item>
+					<Link to="/login">
+						<Nav.Item>Login</Nav.Item>
+					</Link>
+					<Link to="/signup">
+						<Nav.Item>Sign Up</Nav.Item>
+					</Link>
 				</Nav.Container>
 				<Nav.Container position="end">
 					<Nav.Item>Hello, Guest</Nav.Item>
