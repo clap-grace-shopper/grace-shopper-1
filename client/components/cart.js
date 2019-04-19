@@ -9,7 +9,24 @@ class Cart extends React.Component {
   }
 
   render() {
-    return <div>Cart</div>
+    const arrToMap = Object.values(localStorage)
+    return (
+      <div>
+        {arrToMap.map(cake => {
+          let parsed = JSON.parse(cake)
+          return (
+            <div id="eachCake" key={parsed.id}>
+              <p>Cake: {parsed[0]}</p>
+              <p>Price: {parsed[1]}</p>
+              <img id="shoppingCartImg" src={parsed[2]} />
+            </div>
+          )
+        })}
+        <Link to="/checkout">
+          <Button color="danger">Checkout</Button>
+        </Link>
+      </div>
+    )
   }
 }
 
