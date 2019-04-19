@@ -17,6 +17,7 @@ const App = () => {
         <Route exact path="/signup" component={Signup} />
         <Route path="/cakes/:id" component={SingleCake} />
         <Route path="/cart" component={Cart} />
+        <Route path="/checkout" component={Checkout} />
       </Switch>
     </Router>
   )
