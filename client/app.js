@@ -6,6 +6,7 @@ import {Navbar, Login, Signup} from './components'
 import Routes from './routes'
 import SingleCake from './components/singleCake'
 import Cart from './components/cart'
+import Checkout from './components/checkout'
 
 const App = () => {
   return (
