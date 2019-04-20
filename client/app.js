@@ -1,26 +1,17 @@
-import React from 'react'
-import AllCakes from '../client/components/allCakes'
-import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
+import React from 'react';
+// import {BrowserRouter as Router, Route} from 'react-router-dom';
+// import {Login, Signup, UserHome, AllCakes, SingleCake, Checkout, Cart} from './components';
 
-import {Navbar, Login, Signup} from './components'
-import Routes from './routes'
-import SingleCake from './components/singleCake'
-import Cart from './components/cart'
+import {Navbar} from './components';
+import Routes from './routes';
 
 const App = () => {
-  return (
-    <Router>
-      <Navbar />
-      <Switch>
-        <Route exact path="/cakes" component={AllCakes} />
-        <Route exact path="/login" component={Login} />
-        <Route exact path="/signup" component={Signup} />
-        <Route path="/cakes/:id" component={SingleCake} />
-        <Route path="/cart" component={Cart} />
-        <Route path="/checkout" component={Checkout} />
-      </Switch>
-    </Router>
-  )
-}
+	return (
+		<div>
+			<Navbar />
+			<Routes />
+		</div>
+	);
+};
 
-export default App
+export default App;
