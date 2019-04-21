@@ -31,12 +31,18 @@ if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
     googleConfig,
     (token, refreshToken, profile, done) => {
       const googleId = profile.id
-      const name = profile.displayName
       const email = profile.emails[0].value
+      const firstName = profile.displayName ? profile.displayName : email
 
+      console.log('the profile info: ', profile)
       User.findOrCreate({
         where: {googleId},
-        defaults: {name, email}
+        defaults: {
+          firstName,
+          lastName: '.. ',
+          email,
+          address: '.. '
+        }
       })
         .then(([user]) => done(null, user))
         .catch(done)
@@ -55,3 +61,13 @@ if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
     })
   )
 }
+
+passport.serializeUser((user, done) => {
+  done(null, user.id)
+})
+
+passport.deserializeUser((id, done) => {
+  User.findByPK(id)
+    .then(user => done(null, user))
+    .catch(done)
+})
