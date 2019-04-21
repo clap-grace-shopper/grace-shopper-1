@@ -37,7 +37,7 @@ if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
       User.findOrCreate({
         where: {googleId},
         defaults: {
-          firstName: 'not given',
+          firstName: googleId,
           lastName: 'not given',
           address: 'not given',
           email
@@ -55,7 +55,7 @@ if (!process.env.GOOGLE_CLIENT_ID || !process.env.GOOGLE_CLIENT_SECRET) {
   router.get(
     '/callback',
     passport.authenticate('google', {
-      successRedirect: '/cakes',
+      successRedirect: '/home',
       failureRedirect: '/login'
     })
   )
