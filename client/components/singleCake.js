@@ -1,6 +1,7 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import {getSingleCake} from '../store/product'
+import {savedCart} from '../store/cart'
 import {Columns, Button} from 'react-bulma-components/full'
 
 class SingleCake extends React.Component {
@@ -27,12 +28,19 @@ class SingleCake extends React.Component {
           <p>{cake.description}</p>
           <p>{cake.ingredients}</p>
           <Button
-            onClick={() =>
-              localStorage.setItem(
-                `${cake.name}`,
-                JSON.stringify([cake.name, cake.price, cake.imageUrl, cake.id])
-              )
-            }
+            onClick={() => {
+              // localStorage.setItem(
+              //   `${cake.name}`,
+              //   JSON.stringify([cake.name, cake.price, cake.imageUrl, cake.id])
+              // )
+              let cartObj = {
+                name: cake.name,
+                price: cake.price,
+                imageUrl: cake.imageUrl,
+                id: cake.id
+              }
+              this.props.setCakes(cartObj)
+            }}
             color="danger"
           >
             Add to Cart
@@ -44,11 +52,13 @@ class SingleCake extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  state: state.cakes.singleCake
+  cakes: state.cakes,
+  cart: state.cart
 })
 
 const mapDispatchToProps = dispatch => ({
-  retrieveSingleCake: id => dispatch(getSingleCake(id))
+  retrieveSingleCake: id => dispatch(getSingleCake(id)),
+  setCakes: cartAlias => dispatch(savedCart(cartAlias))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(SingleCake)
