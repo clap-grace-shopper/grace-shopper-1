@@ -11,25 +11,42 @@ export const saveCart = cart => {
 }
 
 //thunks
-export const loadedCart = () => dispatch => {
+export const loadedCart = () => async dispatch => {
   try {
-    const serializedState = localStorage.getItem('state')
-    if (serializedState === null) {
-      return undefined
+    const serializedState = await localStorage.getItem('cart')
+    console.log('serializedState:', serializedState)
+
+    if (!serializedState) {
+      console.log('the if in loadedCart')
+      return null
     }
+
     const parsedState = JSON.parse(serializedState)
-    dispatch(loadCart(parsedState))
+    console.log('parsed:', parsedState)
+    const hack = parsedState.slice(1)
+    dispatch(loadCart(hack))
   } catch (error) {
+    console.log('error in loadedState')
+    console.log(error)
     return null
   }
 }
 
 export const savedCart = state => async dispatch => {
   try {
+    let items = [localStorage.getItem('cart')]
+    if (!items) {
+      localStorage.setItem('cart', [])
+    }
+
+    console.log('items:', items)
+
     const serializedState = JSON.stringify(state)
     console.log('meow:', serializedState)
-    await localStorage.setItem('state', serializedState)
-    dispatch(saveCart(serializedState))
+
+    items.push(serializedState)
+    await localStorage.setItem('cart', items)
+    dispatch(saveCart(items))
   } catch (error) {
     console.error(error)
   }
@@ -37,16 +54,16 @@ export const savedCart = state => async dispatch => {
 
 //state
 const initialState = {
-  cartCakes: []
+  cartCakes: {}
 }
 
 //Reducer
 export default (state = initialState, action) => {
   switch (action.type) {
     case SAVE_CART:
-      return {...state, cart: action.cart}
+      return {...state, cart: [...state.cart, action.cart]}
     case LOAD_CART:
-      return {...state, cart: action.cart}
+      return {...state, cart: [...state.cart, action.cart]}
     default:
       return state
   }
