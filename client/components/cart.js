@@ -9,11 +9,20 @@ class Cart extends React.Component {
     this.props.getCart()
   }
   render() {
-    console.log('props:', this.props)
-    const arrToMap = this.props.cart
+    // const arrToMap = this.props.cart
 
     // console.log('meow:', this.props.getCart())
     // console.log('meowCopy:', arrToMap)
+    const arrToMap = []
+    for (let k in localStorage) {
+      let cake = JSON.parse(localStorage[k])
+      // console.log('this is the cake', cake)
+      if (typeof cake === 'object') {
+        arrToMap.push(cake)
+        // console.log('what is arrToMap', arrToMap)
+      }
+    }
+    console.log('this is arrToMap', typeof arrToMap)
     return (
       // <div>Hello</div>
       <div>
