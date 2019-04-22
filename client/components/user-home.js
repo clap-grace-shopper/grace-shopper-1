@@ -1,74 +1,49 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
-import {Columns, Table, Heading} from 'react-bulma-components/full';
+import React from 'react'
+import PropTypes from 'prop-types'
+import {connect} from 'react-redux'
+import {Columns, Table, Heading, Button} from 'react-bulma-components/full'
+import Profile from './table'
 
 /**
  * COMPONENT
  */
-export const UserHome = (props) => {
-	const {email} = props;
+class UserHome extends React.Component {
+  constructor() {
+    super()
+    this.state = {isHidden: true}
+    this.handleClick = this.handleClick.bind(this)
+  }
 
-	console.log('this is the userrrr', props.user);
+  handleClick() {
+    this.setState({
+      isHidden: !this.state.isHidden
+    })
+  }
+  render() {
+    return (
+      <Columns align="center">
+        <Columns.Column>
+          <Heading> Welcome, {this.props.user.firstName}! </Heading>
+          <Columns.Column>
+            <Heading subtitle size={6}>
+              Your Profile Information
+            </Heading>
+            <Button onClick={this.handleClick}>Edit Profile</Button>
 
-	return (
-		<Columns align="center">
-			<Columns.Column>
-				<Heading>Welcome, {props.user.firstName}!</Heading>
-				<Columns.Column>
-					<Heading subtitle size={6}>
-						Your Profile Information
-					</Heading>
-					<Table size="one-half">
-						<thead>
-							<tr>
-								<th />
-								<th />
-							</tr>
-						</thead>
-
-						<tbody>
-							<tr>
-								<th className="is-selected">Name</th>
-								<td>
-									{props.user.firstName} {props.user.lastName}
-								</td>
-							</tr>
-							<tr>
-								<th className="is-selected">Email</th>
-								<td>{props.user.email}</td>
-							</tr>
-							<tr>
-								<th className="is-selected">Address</th>
-								<td>{props.user.address}</td>
-							</tr>
-							<tr>
-								<th className="is-selected">Order History</th>
-								<td>TBD</td>
-							</tr>
-						</tbody>
-					</Table>
-				</Columns.Column>
-			</Columns.Column>
-		</Columns>
-	);
-};
+            <Profile props={this.props} isHidden={this.state.isHidden} />
+          </Columns.Column>
+        </Columns.Column>
+      </Columns>
+    )
+  }
+}
 
 /**
  * CONTAINER
  */
-const mapState = (state) => {
-	return {
-		email: state.user.email,
-		user: state.user
-	};
-};
+const mapState = state => ({
+  email: state.user.email,
+  user: state.user
+})
 
-export default connect(mapState)(UserHome);
-
-/**
- * PROP TYPES
- */
-UserHome.propTypes = {
-	email: PropTypes.string
-};
+export default connect(mapState)(UserHome)
