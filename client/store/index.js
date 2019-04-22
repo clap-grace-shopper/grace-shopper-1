@@ -6,13 +6,13 @@ import user from './user'
 import product from './product'
 import {cart, loadedCart, savedCart, loadCart} from './cart'
 
-const persistedState = loadedCart()
+// const persistedState = loadedCart()
 
 const reducer = combineReducers({
   user: user,
-  cakes: product,
-  cart,
-  persistedState
+  cakes: product
+  // cart,
+  // persistedState
 })
 
 const middleware = composeWithDevTools(
@@ -20,11 +20,11 @@ const middleware = composeWithDevTools(
 )
 const store = createStore(reducer, middleware)
 
-store.subscribe(() => {
-  savedCart({
-    cart: loadCart().cart
-  })
-})
+// store.subscribe(() => {
+//   savedCart({
+//     cart: loadCart().cart
+//   })
+// })
 
 export default store
 export * from './user'

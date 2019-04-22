@@ -1,22 +1,17 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {getSingleCake} from '../store/product'
-import {savedCart} from '../store/cart'
+import {getSingleCake, addingCakesToCart} from '../store/product'
 import {Columns, Button} from 'react-bulma-components/full'
 
 class SingleCake extends React.Component {
-  constructor() {
-    super()
-  }
-  componentDidMount() {
-    console.log('component props:', this.props)
-    this.props.retrieveSingleCake(this.props.match.params.id)
+  async componentDidMount() {
+    console.log('In the comp did mount!')
+    await this.props.retrieveSingleCake(this.props.match.params.id)
   }
 
   render() {
-    let cake = this.props.state
-    console.log('single cake props:', this.props.state)
-    console.log('localstorename:', localStorage)
+    console.log('PROPS:', this.props)
+    const cake = this.props.singleCake
     return (
       <Columns>
         <Columns.Column>
@@ -27,22 +22,7 @@ class SingleCake extends React.Component {
           <p>{cake.price}</p>
           <p>{cake.description}</p>
           <p>{cake.ingredients}</p>
-          <Button
-            onClick={() => {
-              // localStorage.setItem(
-              //   `${cake.name}`,
-              //   JSON.stringify([cake.name, cake.price, cake.imageUrl, cake.id])
-              // )
-              let cartObj = {
-                name: cake.name,
-                price: cake.price,
-                imageUrl: cake.imageUrl,
-                id: cake.id
-              }
-              this.props.setCakes(cartObj)
-            }}
-            color="danger"
-          >
+          <Button color="danger" onClick={() => this.props.addToCart(cake)}>
             Add to Cart
           </Button>
         </Columns.Column>
@@ -52,13 +32,12 @@ class SingleCake extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  cakes: state.cakes,
-  cart: state.cart
+  singleCake: state.cakes.singleCake
 })
 
 const mapDispatchToProps = dispatch => ({
   retrieveSingleCake: id => dispatch(getSingleCake(id)),
-  setCakes: cartAlias => dispatch(savedCart(cartAlias))
+  addToCart: cake => dispatch(addingCakesToCart(cake))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(SingleCake)

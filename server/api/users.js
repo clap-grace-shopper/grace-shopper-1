@@ -15,3 +15,14 @@ router.get('/', async (req, res, next) => {
     next(err)
   }
 })
+
+router.put('/', async (req, res, next) => {
+  try {
+    console.log('this is the req.body', req.body)
+    const needToUpdate = await User.findByPk(req.body.id)
+    const updatedProfile = await needToUpdate.update(req.body)
+    res.json(updatedProfile)
+  } catch (err) {
+    next(err)
+  }
+})
