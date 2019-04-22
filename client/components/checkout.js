@@ -9,7 +9,12 @@ class Checkout extends React.Component {
   }
 
   render() {
-    return <div>Checkout</div>
+    return (
+      <div>
+        <p>Give Us Your Money and We'll Give You Cake</p>
+        <Button>Checkout</Button>
+      </div>
+    )
   }
 }
 

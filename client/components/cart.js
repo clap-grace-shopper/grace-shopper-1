@@ -15,7 +15,13 @@ class Cart extends React.Component {
     console.log('meow:', this.props.getCart())
     console.log('meowCopy:', arrToMap)
     return (
-      <div>Hello</div>
+      <div>
+        <div>Stuff Will Go Here!</div>
+        <Link to={`/checkout`}>
+          <Button>Proceed to Checkout</Button>
+        </Link>
+      </div>
+
       // <div>
       //   {arrToMap.map(cake => {
       //     let parsed = JSON.parse(cake)
