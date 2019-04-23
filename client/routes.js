@@ -12,6 +12,7 @@ import {me} from './store'
 import {getCakes} from './store/product'
 import {NotFound} from './components/notFound'
 import {NotAuthorised} from './components/notAuthorised'
+import {AfterCheckout} from './components/afterCheckout'
 
 /**
  * COMPONENT
@@ -34,7 +35,12 @@ class Routes extends Component {
         <Route path="/cakes/:id" component={SingleCake} />
         <Route exact path="/cart" component={Cart} />
         <Route exact path="/api/users" component={NotAuthorised} />
+
         {!isAdmin && <Route exact path="/checkout" component={Checkout} />}
+        {!isAdmin && (
+          <Route exact path="/aftercheckout" component={AfterCheckout} />
+        )}
+
         {isLoggedIn &&
           !isAdmin && (
             <Switch>
