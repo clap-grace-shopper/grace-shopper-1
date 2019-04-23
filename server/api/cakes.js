@@ -19,3 +19,17 @@ router.get('/:id', async (req, res, next) => {
     next(err)
   }
 })
+
+router.put('/', async (req, res, next) => {
+  try {
+    console.log('this is the req.body', req.body)
+    const deleteRes = await Cake.destroy({
+      where: {
+        id: req.body.id
+      }
+    })
+    res.json(deleteRes)
+  } catch (err) {
+    next(err)
+  }
+})

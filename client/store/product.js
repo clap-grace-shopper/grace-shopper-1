@@ -1,4 +1,6 @@
+/* eslint-disable no-case-declarations */
 import axios from 'axios'
+import history from '../history'
 
 //Action Type
 export const GOT_CAKES = 'GOT_CAKES'
@@ -6,6 +8,7 @@ export const GOT_SINGLE_CAKE = 'GOT_SINGLE_CAKE'
 export const ADD_TO_CART = 'ADD_TO_CART'
 export const GET_CART = 'GET_CART'
 export const DELETE_FROM_CART = ' DELETE_FROM_CART'
+export const DELETE_PRODUCT = 'DELETE_PRODUCT'
 
 //Action Creator
 export const gotCakes = cakes => {
@@ -27,6 +30,9 @@ export const getCart = () => {
 export const deleteCake = cake => {
   return {type: DELETE_FROM_CART, cake}
 }
+
+const deleteProduct = cake => ({type: DELETE_PRODUCT, cake})
+
 //Thunks
 export const getCakes = () => async dispatch => {
   try {
@@ -49,6 +55,16 @@ export const getSingleCake = id => async dispatch => {
 export const addingCakesToCart = cake => dispatch => {
   try {
     dispatch(addCakeToCart(cake))
+  } catch (err) {
+    console.error(err)
+  }
+}
+
+export const deleteCakeProduct = cake => async dispatch => {
+  try {
+    const {data} = await axios.put('/api/cakes', cake)
+    dispatch(deleteProduct(cake))
+    history.push('/cakes')
   } catch (err) {
     console.error(err)
   }
@@ -97,13 +113,10 @@ export default (state = initialState, action) => {
     case DELETE_FROM_CART:
       const index = localStorage.key(JSON.stringify(action.cake))
       localStorage.removeItem(index)
-
       const cakeId = action.cake.id
       return {...state, cart: state.cart.filter(cake => cake.id !== cakeId)}
-
-    // cakeIndex = state.cart.length
-    // tempArr = state.cart.slice(0, cakeIndex) + state.cart.slice(cakeIndex + 1)
-    // return {...state, cart: tempArr}
+    case DELETE_PRODUCT:
+      return {...state, cakes: state.cakes.filter(cake => cake.id !== cakeId)}
 
     default:
       return state
