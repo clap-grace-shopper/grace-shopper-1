@@ -26,7 +26,7 @@ class Cart extends React.Component {
     let count = 0
     let total = 0
     return (
-      <Container>
+      <Container class="cart">
         <Columns.Column>
           {arrToMap.map(cake => {
             count++

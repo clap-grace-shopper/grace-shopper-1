@@ -6,7 +6,7 @@ export const NotFound = () => {
   return (
     <div>
       <br />
-      <Columns align="center">
+      <Columns class="notAuth" align="center">
         <Columns.Column>
           <Heading> Sorry! You are not authorised to see this stuff!!</Heading>
           <Columns.Column>

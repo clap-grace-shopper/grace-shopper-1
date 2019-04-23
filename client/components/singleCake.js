@@ -16,7 +16,7 @@ class SingleCake extends React.Component {
   render() {
     const cake = this.props.singleCake
     return (
-      <Container>
+      <Container class='singleCake'>
         <Columns>
           <Columns.Column size="one-half" class="singleCakeImg">
             <Box>

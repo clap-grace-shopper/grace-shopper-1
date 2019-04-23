@@ -7,8 +7,8 @@ import {Navbar as Nav} from 'react-bulma-components/full'
 
 const Navbar = (props, {handleClick, isLoggedIn}) => {
   return (
-    <div color="93acb5">
-      <Nav>
+    <div>
+      <Nav class="navBar">
         {props && props.isLoggedIn ? (
           !props.user.isAdmin ? (
             <Nav.Menu>

@@ -4,9 +4,9 @@ import {Content} from 'react-bulma-components/full'
 export default class Home extends React.Component {
   render() {
     return (
-      <div className="home">
-        <Content>
-          <h1>Clap for Cakes</h1>
+      <div>
+        <Content className="home">
+          <h1 id="danger">Clap for Cakes</h1>
         </Content>
       </div>
     )

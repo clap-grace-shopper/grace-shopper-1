@@ -3,6 +3,10 @@ body {
   background-color: #c0d6e0;
 }
 
+html {
+  background-color: #a0d2e9;
+}
+
 a {
   text-decoration: none;
 }
@@ -36,7 +40,7 @@ form div {
 }
 
 .navBar {
-  color: #93acb5;
+  color: #7392b7;
 }
 
 #shoppingCartImg {
@@ -48,18 +52,31 @@ form div {
   max-width: 450px;
 }
 
-.orderLook {
-  padding-top: 5px;
-  padding-bottom: 10px;
-}
-
 .home {
   display: flex;
   flex-direction: column;
   align-items: right;
   margin-top: 120px;
   font-size: 35px;
-  color: black;
+}
+
+.singleCake,
+.cart,
+.home,
+.notFound,
+.authForm,
+.notAuth,
+.userHome {
+  height: 100vh;
+}
+
+.orderLook {
+  padding-top: 5px;
+  padding-bottom: 10px;
+}
+
+#danger {
+  color: hsl(348, 100%, 61%);
 }
 
 #nav {
@@ -76,6 +93,7 @@ form div {
   display: flex;
   flex-direction: column;
   font-size: 22px;
+  height: 100vh;
 }
 
 #checkoutForm {
@@ -83,14 +101,15 @@ form div {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  color: crimson;
+  color: hsl(348, 100%, 61%);
 }
 
 #aftercheckoutForm {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: right;
   margin-top: 120px;
   font-size: 35px;
-  color: crimson;
+  color: hsl(348, 100%, 61%);
+  height: 100vh;
 }
