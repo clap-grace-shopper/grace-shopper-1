@@ -21,10 +21,6 @@ class Checkout extends React.Component {
               Email:
               <input type="text" name="email" />
             </label>
-            <label>
-              Email:
-              <input type="text" name="email" />
-            </label>
           </div>
           <div id="AddressEmail">
             <h1>Shipping Address</h1>
@@ -46,7 +42,7 @@ class Checkout extends React.Component {
             </label>
           </div>
           <Link to="/aftercheckout">
-            <Button>Place Order</Button>
+            <Button onClick={() => localStorage.clear()}>Place Order</Button>
           </Link>
         </form>
       </div>

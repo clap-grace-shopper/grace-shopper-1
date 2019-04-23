@@ -29,10 +29,11 @@ const Navbar = (props, {handleClick, isLoggedIn}) => {
                 <Nav.Item>
                   <img
                     id="cart"
-                    src="https://previews.123rf.com/images/urfandadashov/urfandadashov1808/urfandadashov180817255/107941889-shopping-cart-vector-icon-isolated-on-transparent-background-shopping-cart-logo-concept.jpg"
+                    src="https://mrhandtruck.com/web/image/product.template/13936/image?unique=8a32a93"
                   />
                   View Cart
                 </Nav.Item>
+                <Nav.Item>{localStorage.length}</Nav.Item>
               </Link>
               <Nav.Item>Hello, {props.user.firstName}</Nav.Item>
               <Nav.Item onClick={props.handleClick}>Logout</Nav.Item>
@@ -63,7 +64,13 @@ const Navbar = (props, {handleClick, isLoggedIn}) => {
           </Nav.Container>
           <Nav.Container position="end">
             <Link to="/cart">
-              <Nav.Item>View Cart</Nav.Item>
+              <Nav.Item>
+                <img
+                  id="cart"
+                  src="https://mrhandtruck.com/web/image/product.template/13936/image?unique=8a32a93"
+                />
+                View Cart
+              </Nav.Item>
             </Link>
             <Nav.Item>{localStorage.length}</Nav.Item>
             <Nav.Item>Hello, Guest</Nav.Item>
