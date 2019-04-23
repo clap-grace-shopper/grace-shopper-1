@@ -13,12 +13,6 @@ import {
 import {Link} from 'react-router-dom'
 
 class AllCakes extends React.Component {
-  constructor() {
-    super()
-
-    this.myRef = React.createRef()
-    this.handleAddToCart = this.handleAddToCart.bind(this)
-  }
   componentDidMount() {
     this.props.retrieveCakes()
   }
