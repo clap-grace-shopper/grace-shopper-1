@@ -1,6 +1,12 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {Columns, Button, Heading, Box} from 'react-bulma-components/full'
+import {
+  Columns,
+  Button,
+  Heading,
+  Box,
+  Container
+} from 'react-bulma-components/full'
 import {Link} from 'react-router-dom'
 import {loadCart, deleteCakeFromCart} from '../store/product'
 
@@ -20,47 +26,53 @@ class Cart extends React.Component {
     let count = 0
     let total = 0
     return (
-      <Columns.Column>
-        {arrToMap.map(cake => {
-          count++
-          total += Number(cake.price)
-          return (
-            <Box key={count} size="is-one-third">
-              <Columns size={3}>
-                <Columns.Column align="right">
-                  <img id="shoppingCartImg" src={cake.imageUrl} />
-                </Columns.Column>
-                <Columns.Column>
-                  <Heading size={4}>{cake.name}</Heading>
-                  <Heading subtitle size={6}>
-                    {cake.description}
-                  </Heading>
-                  <Heading size={5}>${cake.price}.00</Heading>
-                  <Button
-                    onClick={() => this.props.deleteFromCart(cake)}
-                    color="danger"
-                  >
-                    Delete
-                  </Button>
-                </Columns.Column>
-              </Columns>
-            </Box>
-          )
-        })}
+      <Container>
         <Columns.Column>
-          <Columns align="center">
-            <Heading>Total: ${total}.00</Heading>
-          </Columns>
-          <Columns align="center">
-            <Heading subtitle size={6}>
-              Order look good?
-            </Heading>
-            <Link to="/checkout">
-              <Button color="danger">Checkout</Button>
-            </Link>
-          </Columns>
+          {arrToMap.map(cake => {
+            count++
+            total += Number(cake.price)
+            return (
+              <Box className="cartBox" key={count} size="is-one-third">
+                <Columns size={2}>
+                  <Columns.Column align="right">
+                    <Columns className="shoppingCartImg">
+                      <img id="shoppingCartImg" src={cake.imageUrl} />
+                    </Columns>
+                  </Columns.Column>
+                  <Columns.Column>
+                    <Heading size={4}>{cake.name}</Heading>
+                    <Heading subtitle size={6}>
+                      {cake.description}
+                    </Heading>
+                    <Heading size={5}>${cake.price}.00</Heading>
+                    <Button
+                      onClick={() => this.props.deleteFromCart(cake)}
+                      color="danger"
+                    >
+                      Delete
+                    </Button>
+                  </Columns.Column>
+                </Columns>
+              </Box>
+            )
+          })}
+          <Columns.Column>
+            <Columns align="center">
+              <Heading>Total: ${total}.00</Heading>
+            </Columns>
+            <Columns className="orderLook" align="center">
+              <Heading subtitle size={6}>
+                Order look good?
+              </Heading>
+            </Columns>
+            <Columns>
+              <Link to="/checkout">
+                <Button color="danger">Checkout</Button>
+              </Link>
+            </Columns>
+          </Columns.Column>
         </Columns.Column>
-      </Columns.Column>
+      </Container>
     )
   }
 }
