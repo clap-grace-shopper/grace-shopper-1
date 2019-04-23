@@ -44,7 +44,6 @@ export const getSingleCake = id => async dispatch => {
 export const addingCakesToCart = cake => dispatch => {
   try {
     dispatch(addCakeToCart(cake))
-    localStorage.setItem(cake, cake)
   } catch (err) {
     console.error(err)
   }
@@ -73,10 +72,10 @@ export default (state = initialState, action) => {
     case GOT_SINGLE_CAKE:
       return {...state, singleCake: action.cake}
     case ADD_TO_CART:
-      console.log('is my action to add cart working?', {
-        ...state,
-        cart: [...state.cart, action.cake]
-      })
+      localStorage.setItem(
+        JSON.stringify(state.cart.length),
+        JSON.stringify(action.cake)
+      )
       return {...state, cart: [...state.cart, action.cake]}
     case GET_CART:
       return {...state}
