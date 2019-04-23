@@ -26,11 +26,21 @@ form div {
 }
 
 .singleCakeImg {
-  max-width: 900px;
-  max-height: 900px;
+  max-width: 500px;
+  max-height: 500px;
 }
 
 #shoppingCartImg {
   max-width: 200px;
   max-height: 200px;
+}
+
+#nav {
+  max-width: 100px;
+  max-height: 100px;
+}
+
+#cart {
+  max-width: 50px;
+  max-height: 50px;
 }

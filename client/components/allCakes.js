@@ -1,50 +1,77 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {getCakes} from '../store/product'
+import {getCakes, addingCakesToCart} from '../store/product'
 // import {savedCart} from '../store/cart'
-import {Columns, Button} from 'react-bulma-components/full'
+import {
+  Columns,
+  Button,
+  Heading,
+  Container,
+  Section,
+  Box
+} from 'react-bulma-components/full'
 import {Link} from 'react-router-dom'
-import {addingCakesToCart} from '../store/product'
 
 class AllCakes extends React.Component {
+  constructor() {
+    super()
+    this.state = {
+      orderPlaced: false
+    }
+    this.myRef = React.createRef()
+
+    this.handleAddToCart = this.handleAddToCart.bind(this)
+  }
   componentDidMount() {
     this.props.retrieveCakes()
   }
 
+  handleAddToCart(cake) {
+    this.setState({orderPlaced: !this.state.orderPlaced})
+    this.props.addToCart(cake)
+  }
+
   render() {
     let allCakes = this.props.cakes.cakes
+    console.log('this is the stateeeeeee', this.state)
 
     return allCakes ? (
-      <Columns style={{flexWrap: 'wrap'}} ismultiline="true">
-        {allCakes.map(cake => (
-          <Columns.Column className="column is-one-quarter" key={cake.name}>
-            <Columns>
-              <Link to={`/cakes/${cake.id}`}>
-                <img src={cake.imageUrl} className="allCakeImg" />
-              </Link>
-            </Columns>
+      <Container>
+        <Columns style={{flexWrap: 'wrap'}} ismultiline="true">
+          {allCakes.map(cake => (
+            <Section key={cake.name}>
+              <Box>
+                <Columns.Column padding="300px">
+                  <Columns>
+                    <Link to={`/cakes/${cake.id}`}>
+                      <img src={cake.imageUrl} className="allCakeImg" />
+                    </Link>
+                  </Columns>
+                  <Columns>{cake.name}</Columns>
 
-            <Columns>
-              <Columns.Column>{cake.name}</Columns.Column>
-              <Columns.Column>${cake.price}</Columns.Column>
-            </Columns>
-            <Columns>
-              {this.props.isAdmin ? (
-                <Link to={`/cakes/${cake.id}`}>
-                  <Button color="danger">View this cake</Button>
-                </Link>
-              ) : (
-                <Button
-                  onClick={() => this.props.addToCart(cake)}
-                  color="danger"
-                >
-                  Add to Cart
-                </Button>
-              )}
-            </Columns>
-          </Columns.Column>
-        ))}
-      </Columns>
+                  <Columns>
+                    <Columns.Column>
+                      <Button
+                        color="danger"
+                        onClick={() => this.handleAddToCart(cake)}
+                      >
+                        Add to Cart
+                      </Button>
+                    </Columns.Column>
+                    <Columns.Column>
+                      <Heading size={6}>${cake.price}.00</Heading>
+                    </Columns.Column>
+                  </Columns>
+
+                  <Columns>
+                    <div ref={this.myRef}>Added to Cart!</div>
+                  </Columns>
+                </Columns.Column>
+              </Box>
+            </Section>
+          ))}
+        </Columns>
+      </Container>
     ) : (
       'Loading'
     )

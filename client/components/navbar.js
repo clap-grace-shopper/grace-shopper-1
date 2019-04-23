@@ -7,20 +7,34 @@ import {Navbar as Nav, Columns} from 'react-bulma-components/full'
 
 const Navbar = (props, {handleClick, isLoggedIn}) => {
   return (
-    <Nav>
+    <Nav color="light">
       {props && props.isLoggedIn ? (
         !props.user.isAdmin ? (
           <Nav.Menu>
             <Nav.Container>
-              <Nav.Item>Home</Nav.Item>
+              <img
+                id="nav"
+                src="https://banner2.kisspng.com/20180313/czw/kisspng-cupcake-bakery-doughnut-logo-simple-hand-painted-cake-5aa7f4e98069d0.752785361520956649526.jpg"
+                alt="Clap for Cakes Logo"
+              />
+              <Link to="/home">
+                <Nav.Item>Home</Nav.Item>
+              </Link>
               <Link to="/cakes">
                 <Nav.Item>View Cakes</Nav.Item>
               </Link>
             </Nav.Container>
             <Nav.Container position="end">
               <Link to="/cart">
-                <Nav.Item>View Cart</Nav.Item>
+                <Nav.Item>
+                  <img
+                    id="cart"
+                    src="https://previews.123rf.com/images/urfandadashov/urfandadashov1808/urfandadashov180817255/107941889-shopping-cart-vector-icon-isolated-on-transparent-background-shopping-cart-logo-concept.jpg"
+                  />
+                  View Cart
+                </Nav.Item>
               </Link>
+              {/* <Nav.Item>{localStorage.length}</Nav.Item> */}
               <Nav.Item>Hello, {props.user.firstName}</Nav.Item>
               <Nav.Item onClick={props.handleClick}>Logout</Nav.Item>
             </Nav.Container>
@@ -52,6 +66,7 @@ const Navbar = (props, {handleClick, isLoggedIn}) => {
             <Link to="/cart">
               <Nav.Item>View Cart</Nav.Item>
             </Link>
+            <Nav.Item>{localStorage.length}</Nav.Item>
             <Nav.Item>Hello, Guest</Nav.Item>
           </Nav.Container>
         </Nav.Menu>
@@ -67,7 +82,8 @@ const Navbar = (props, {handleClick, isLoggedIn}) => {
 const mapState = state => {
   return {
     isLoggedIn: !!state.user.id,
-    user: state.user
+    user: state.user,
+    cakes: state.cakes
   }
 }
 
