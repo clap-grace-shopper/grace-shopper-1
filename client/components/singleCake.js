@@ -1,7 +1,8 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {getSingleCake, addingCakesToCart} from '../store/product'
+import {getSingleCake, deleteCakeProduct, addingCakesToCart} from '../store/product'
 import {Columns, Button, Box} from 'react-bulma-components/full'
+
 
 class SingleCake extends React.Component {
   async componentDidMount() {
@@ -29,9 +30,12 @@ class SingleCake extends React.Component {
             <p>{cake.description}</p>
             <p>{cake.ingredients}</p>
             {this.props.isAdmin ? (
-              <Button color="danger">
+              <Button
+                color="danger"
+                onClick={() => this.props.deleteCake(cake)}
+              >
                 {/* ---- to do edit/delete functionality ---*/}
-                DELETE/EDIT THIS CAKE
+                Delete this cake
               </Button>
             ) : (
               <Button color="danger" onClick={() => this.props.addToCart(cake)}>
@@ -52,7 +56,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   retrieveSingleCake: id => dispatch(getSingleCake(id)),
-  addToCart: cake => dispatch(addingCakesToCart(cake))
+  addToCart: cake => dispatch(addingCakesToCart(cake)),
+  deleteCake: cake => dispatch(deleteCakeProduct(cake))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(SingleCake)
