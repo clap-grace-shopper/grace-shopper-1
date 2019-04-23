@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {logout} from '../store'
-import {Navbar as Nav, Columns} from 'react-bulma-components/full'
+import {Navbar as Nav} from 'react-bulma-components/full'
 
 const Navbar = (props, {handleClick, isLoggedIn}) => {
   return (
@@ -34,7 +34,6 @@ const Navbar = (props, {handleClick, isLoggedIn}) => {
                   View Cart
                 </Nav.Item>
               </Link>
-              {/* <Nav.Item>{localStorage.length}</Nav.Item> */}
               <Nav.Item>Hello, {props.user.firstName}</Nav.Item>
               <Nav.Item onClick={props.handleClick}>Logout</Nav.Item>
             </Nav.Container>
