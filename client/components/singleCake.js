@@ -22,9 +22,16 @@ class SingleCake extends React.Component {
           <p>{cake.price}</p>
           <p>{cake.description}</p>
           <p>{cake.ingredients}</p>
-          <Button color="danger" onClick={() => this.props.addToCart(cake)}>
-            Add to Cart
-          </Button>
+          {this.props.isAdmin ? (
+            <Button color="danger">
+              {/* ---- to do edit/delete functionality ---*/}
+              DELETE/EDIT THIS CAKE
+            </Button>
+          ) : (
+            <Button color="danger" onClick={() => this.props.addToCart(cake)}>
+              Add to Cart
+            </Button>
+          )}
         </Columns.Column>
       </Columns>
     )
@@ -32,7 +39,8 @@ class SingleCake extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  singleCake: state.cakes.singleCake
+  singleCake: state.cakes.singleCake,
+  isAdmin: state.user.isAdmin
 })
 
 const mapDispatchToProps = dispatch => ({

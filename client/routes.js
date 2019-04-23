@@ -10,6 +10,9 @@ import SingleCake from './components/singleCake'
 
 import {me} from './store'
 import {getCakes} from './store/product'
+import {NotFound} from './components/notFound'
+import {NotAuthorised} from './components/notAuthorised'
+
 /**
  * COMPONENT
  */
@@ -20,25 +23,35 @@ class Routes extends Component {
 
   render() {
     const {isLoggedIn} = this.props
+    const {isAdmin} = this.props.user
+
+    console.log('logging from routes:', this.props)
 
     return (
       <Switch>
         {/* Routes placed here are available to all visitors */}
+        <Route exact path="/" component={Login} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/signup" component={Signup} />
         <Route exact path="/cakes" component={AllCakes} />
         <Route path="/cakes/:id" component={SingleCake} />
-        <Route path="/cart" component={Cart} />
-        <Route path="/checkout" component={Checkout} />
-
-        {isLoggedIn && (
-          <Switch>
-            {/* Routes placed here are only available after logging in */}
-            <Route path="/home" component={UserHome} />
-          </Switch>
-        )}
+        <Route exact path="/cart" component={Cart} />
+        <Route exact path="/api/users" component={NotAuthorised} />
+        {isLoggedIn &&
+          !isAdmin && (
+            <Switch>
+              {/* Routes placed here are only available after logging in */}
+              {/* And are not available to admin*/}
+              <Route exact path="/home" component={UserHome} />
+              <Route exact path="/checkout" component={Checkout} />
+            </Switch>
+          )}
+        {/* Routes placed here are only available after logging in */}
+        {/* And are available to the admin only*/}
+        {isLoggedIn &&
+          isAdmin && <Route exact path="/admin" component={UserHome} />}
         {/* Displays our Login component as a fallback */}
-        <Route component={Login} />
+        <Route component={NotFound} />
       </Switch>
     )
   }
@@ -51,7 +64,8 @@ const mapState = state => {
   return {
     // Being 'logged in' for our purposes will be defined has having a state.user that has a truthy id.
     // Otherwise, state.user will be an empty object, and state.user.id will be falsey
-    isLoggedIn: !!state.user.id
+    isLoggedIn: !!state.user.id,
+    user: state.user
   }
 }
 

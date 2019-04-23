@@ -62,8 +62,9 @@ export const auth = (
   }
 
   try {
-    dispatch(getUser(res.data))
-    history.push('/home')
+    const user = res.data
+    dispatch(getUser(user))
+    user.isAdmin ? history.push('/admin') : history.push('/home')
     console.log('after the push?')
   } catch (dispatchOrHistoryErr) {
     console.error(dispatchOrHistoryErr)
