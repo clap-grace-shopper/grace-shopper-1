@@ -3,15 +3,11 @@ const {Cake} = require('../db/models')
 module.exports = router
 
 router.get('/', async (req, res, next) => {
-  if (!req.user || !req.user.isAdmin) {
-    res.send(401)
-  } else {
-    try {
-      const cakes = await Cake.findAll()
-      res.json(cakes)
-    } catch (err) {
-      next(err)
-    }
+  try {
+    const cakes = await Cake.findAll()
+    res.json(cakes)
+  } catch (err) {
+    next(err)
   }
 })
 
