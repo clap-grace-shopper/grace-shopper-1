@@ -36,12 +36,25 @@ class AllCakes extends React.Component {
 
                   <Columns>
                     <Columns.Column>
-                      <Button
-                        color="danger"
-                        onClick={() => this.props.addToCart(cake)}
-                      >
-                        Add to Cart
-                      </Button>
+                      {this.props.isAdmin ? (
+                        <Link to={`/cakes/${cake.id}`}>
+                          <Button
+                            color="danger"
+                            onClick={() => this.props.addToCart(cake)}
+                          >
+                            View this cake
+                          </Button>
+                        </Link>
+                      ) : (
+                        <Button
+                          color="danger"
+                          onClick={() => this.props.addToCart(cake)}
+                        >
+                          Add to Cart
+                        </Button>
+                      )}
+
+                      {/* hello */}
                     </Columns.Column>
                     <Columns.Column>
                       <Heading size={6}>${cake.price}.00</Heading>
