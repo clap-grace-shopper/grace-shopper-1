@@ -5,6 +5,7 @@ export const GOT_CAKES = 'GOT_CAKES'
 export const GOT_SINGLE_CAKE = 'GOT_SINGLE_CAKE'
 export const ADD_TO_CART = 'ADD_TO_CART'
 export const GET_CART = 'GET_CART'
+export const DELETE_FROM_CART = ' DELETE_FROM_CART'
 
 //Action Creator
 export const gotCakes = cakes => {
@@ -21,6 +22,10 @@ export const addCakeToCart = cake => {
 
 export const getCart = () => {
   return {type: GET_CART}
+}
+
+export const deleteCake = cake => {
+  return {type: DELETE_FROM_CART, cake}
 }
 //Thunks
 export const getCakes = () => async dispatch => {
@@ -49,6 +54,14 @@ export const addingCakesToCart = cake => dispatch => {
   }
 }
 
+export const deleteCakeFromCart = cake => dispatch => {
+  try {
+    dispatch(deleteCake(cake))
+  } catch (err) {
+    console.error(err)
+  }
+}
+
 export const loadCart = () => dispatch => {
   try {
     dispatch(getCart())
@@ -66,6 +79,8 @@ const initialState = {
 
 //Reducer
 export default (state = initialState, action) => {
+  let cakeIndex
+  let tempArr = []
   switch (action.type) {
     case GOT_CAKES:
       return {...state, cakes: action.cakes}
@@ -79,6 +94,16 @@ export default (state = initialState, action) => {
       return {...state, cart: [...state.cart, action.cake]}
     case GET_CART:
       return {...state}
+    case DELETE_FROM_CART:
+      const index = localStorage.key(JSON.stringify(action.cake))
+      localStorage.removeItem(index)
+
+      const cakeId = action.cake.id
+      return {...state, cart: state.cart.filter(cake => cake.id !== cakeId)}
+
+    // cakeIndex = state.cart.length
+    // tempArr = state.cart.slice(0, cakeIndex) + state.cart.slice(cakeIndex + 1)
+    // return {...state, cart: tempArr}
 
     default:
       return state

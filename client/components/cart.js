@@ -2,7 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {Columns, Button, Heading, Box} from 'react-bulma-components/full'
 import {Link} from 'react-router-dom'
-import {loadCart} from '../store/product'
+import {loadCart, deleteCakeFromCart} from '../store/product'
 
 class Cart extends React.Component {
   componentDidMount() {
@@ -36,6 +36,12 @@ class Cart extends React.Component {
                     {cake.description}
                   </Heading>
                   <Heading size={5}>${cake.price}.00</Heading>
+                  <Button
+                    onClick={() => this.props.deleteFromCart(cake)}
+                    color="danger"
+                  >
+                    Delete
+                  </Button>
                 </Columns.Column>
               </Columns>
             </Box>
@@ -64,7 +70,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  getCart: () => dispatch(loadCart())
+  getCart: () => dispatch(loadCart()),
+  deleteFromCart: cake => dispatch(deleteCakeFromCart(cake))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Cart)
