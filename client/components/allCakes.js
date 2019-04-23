@@ -29,9 +29,18 @@ class AllCakes extends React.Component {
               <Columns.Column>${cake.price}</Columns.Column>
             </Columns>
             <Columns>
-              <Button onClick={() => this.props.addToCart(cake)} color="danger">
-                Add to Cart
-              </Button>
+              {this.props.isAdmin ? (
+                <Link to={`/cakes/${cake.id}`}>
+                  <Button color="danger">View this cake</Button>
+                </Link>
+              ) : (
+                <Button
+                  onClick={() => this.props.addToCart(cake)}
+                  color="danger"
+                >
+                  Add to Cart
+                </Button>
+              )}
             </Columns>
           </Columns.Column>
         ))}
@@ -44,7 +53,8 @@ class AllCakes extends React.Component {
 
 const mapStateToProps = state => ({
   cakes: state.cakes,
-  cart: state.cart
+  cart: state.cart,
+  isAdmin: state.user.isAdmin
 })
 
 const mapDispatchToProps = dispatch => ({
