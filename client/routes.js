@@ -34,13 +34,13 @@ class Routes extends Component {
         <Route path="/cakes/:id" component={SingleCake} />
         <Route exact path="/cart" component={Cart} />
         <Route exact path="/api/users" component={NotAuthorised} />
+        {!isAdmin && <Route exact path="/checkout" component={Checkout} />}
         {isLoggedIn &&
           !isAdmin && (
             <Switch>
               {/* Routes placed here are only available after logging in */}
               {/* And are not available to admin*/}
               <Route exact path="/home" component={UserHome} />
-              <Route exact path="/checkout" component={Checkout} />
             </Switch>
           )}
         {/* Routes placed here are only available after logging in */}
