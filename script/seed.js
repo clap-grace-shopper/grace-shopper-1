@@ -12,7 +12,7 @@ async function seed() {
     Cake.create({
       name: 'I Like Big Bundts',
       imageUrl:
-        'https://ichef.bbci.co.uk/food/ic/food_16x9_832/recipes/easy_chocolate_cake_31070_16x9.jpg',
+        'https://prods3.imgix.net/images/articles/2015_11/Hero-Nigella-Lawson-Baking-Five-Spice-Bundt-Cake-Cooking-Sweet-Dessert-Recipe.jpg?auto=format%2Ccompress&dpr=2&ixjsv=2.2.3&q=50&w=750',
       price: 500,
       description: 'This is a bad ass cake.',
       ingredients: 'eggs, apples, sunshine'
@@ -20,7 +20,7 @@ async function seed() {
     Cake.create({
       name: 'All You Need is Cake',
       imageUrl:
-        'https://ichef.bbci.co.uk/food/ic/food_16x9_832/recipes/easy_chocolate_cake_31070_16x9.jpg',
+        'https://luluthebaker.com/wp-content/uploads/2017/06/peanut-butter-chocolate-layer-cake-4.jpg',
       price: 500,
       description: 'Cake is all you need',
       ingredients: 'eggs, apples, sunshine'
@@ -28,7 +28,7 @@ async function seed() {
     Cake.create({
       name: 'Cake My Day',
       imageUrl:
-        'https://ichef.bbci.co.uk/food/ic/food_16x9_832/recipes/easy_chocolate_cake_31070_16x9.jpg',
+        'https://assets.epicurious.com/photos/55b7c1e4a188eea213e6511e/6:4/w_620%2Ch_413/354211_three-layer-berry-pavlova_6x4.jpg',
       price: 500,
       description: 'Do that one more time, cake my day',
       ingredients: 'eggs, apples, sunshine'
@@ -36,7 +36,7 @@ async function seed() {
     Cake.create({
       name: 'Cake by the Ocean',
       imageUrl:
-        'https://ichef.bbci.co.uk/food/ic/food_16x9_832/recipes/easy_chocolate_cake_31070_16x9.jpg',
+        'https://patisseriepetitlapin.com/wp-content/uploads/2015/03/GATEAU_Turquoise_degrade_00.jpg',
       price: 500,
       description: 'I keep on hopin',
       ingredients: 'eggs, apples, sunshine'
@@ -44,7 +44,7 @@ async function seed() {
     Cake.create({
       name: 'Birthday Cake',
       imageUrl:
-        'https://ichef.bbci.co.uk/food/ic/food_16x9_832/recipes/easy_chocolate_cake_31070_16x9.jpg',
+        'https://www.williams-sonoma.com/wsimgs/rk/images/dp/wcm/201849/0523/img55c.jpg',
       price: 500,
       description: 'Oh na na, whats your name',
       ingredients: 'eggs, apples, sunshine'
@@ -86,8 +86,19 @@ async function seed() {
 
   const orders = await Promise.all([
     Orders.create({
-      quantity: 5,
-      status: 'open'
+      quantity: 1,
+      status: 'closed',
+      userId: 1
+    }),
+    Orders.create({
+      quantity: 2,
+      status: 'closed',
+      userId: 2
+    }),
+    Orders.create({
+      quantity: 1,
+      status: 'closed',
+      userId: 3
     })
   ])
 
