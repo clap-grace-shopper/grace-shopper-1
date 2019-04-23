@@ -44,3 +44,25 @@ form div {
   max-width: 50px;
   max-height: 50px;
 }
+#formDiv {
+  display: flex;
+  flex-direction: column;
+  font-size: 22px;
+}
+
+#checkoutForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: crimson;
+}
+
+#aftercheckoutForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 120px;
+  font-size: 35px;
+  color: crimson;
+}
