@@ -1,7 +1,11 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {getSingleCake, addingCakesToCart} from '../store/product'
 import {Columns, Button, Box, Container} from 'react-bulma-components/full'
+import {
+  getSingleCake,
+  deleteCakeProduct,
+  addingCakesToCart
+} from '../store/product'
 
 class SingleCake extends React.Component {
   async componentDidMount() {
@@ -57,7 +61,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   retrieveSingleCake: id => dispatch(getSingleCake(id)),
-  addToCart: cake => dispatch(addingCakesToCart(cake))
+  addToCart: cake => dispatch(addingCakesToCart(cake)),
+  deleteCake: cake => dispatch(deleteCakeProduct(cake))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(SingleCake)
