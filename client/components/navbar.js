@@ -8,7 +8,7 @@ import {Navbar as Nav} from 'react-bulma-components/full'
 const Navbar = (props, {handleClick, isLoggedIn}) => {
   return (
     <div>
-      <Nav class="navBar">
+      <Nav color="lightgrey">
         {props && props.isLoggedIn ? (
           !props.user.isAdmin ? (
             <Nav.Menu>
@@ -32,9 +32,8 @@ const Navbar = (props, {handleClick, isLoggedIn}) => {
                       id="cart"
                       src="https://mrhandtruck.com/web/image/product.template/13936/image?unique=8a32a93"
                     />
-                    View Cart
+                    View Cart: {localStorage.length}
                   </Nav.Item>
-                  <Nav.Item>{localStorage.length}</Nav.Item>
                 </Link>
                 <Nav.Item>Hello, {props.user.firstName}</Nav.Item>
                 <Nav.Item onClick={props.handleClick}>Logout</Nav.Item>
@@ -53,6 +52,11 @@ const Navbar = (props, {handleClick, isLoggedIn}) => {
         ) : (
           <Nav.Menu>
             <Nav.Container>
+              <img
+                id="nav"
+                src="https://banner2.kisspng.com/20180313/czw/kisspng-cupcake-bakery-doughnut-logo-simple-hand-painted-cake-5aa7f4e98069d0.752785361520956649526.jpg"
+                alt="Clap for Cakes Logo"
+              />
               <Link to="/login">
                 <Nav.Item>Login</Nav.Item>
               </Link>
@@ -70,10 +74,10 @@ const Navbar = (props, {handleClick, isLoggedIn}) => {
                     id="cart"
                     src="https://mrhandtruck.com/web/image/product.template/13936/image?unique=8a32a93"
                   />
-                  View Cart
+                  View Cart: {localStorage.length}
                 </Nav.Item>
               </Link>
-              <Nav.Item>{localStorage.length}</Nav.Item>
+
               <Nav.Item>Hello, Guest</Nav.Item>
             </Nav.Container>
           </Nav.Menu>

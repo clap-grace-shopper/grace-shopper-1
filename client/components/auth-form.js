@@ -2,7 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import {auth} from '../store'
-import {Columns, Button} from 'react-bulma-components/full'
+import {Columns, Section, Button} from 'react-bulma-components/full'
 
 /**
  * COMPONENT
@@ -12,71 +12,81 @@ const AuthForm = props => {
 
   return name === 'signup' ? (
     <div class="authForm">
-      <form onSubmit={handleSubmit} name={name}>
-        <div>
-          <label htmlFor="firstName">
-            <small>First Name </small>
-          </label>
-          <input name="firstName" type="text" />
-        </div>
-        <div>
-          <label htmlFor="lastName">
-            <small>Last Name </small>
-          </label>
-          <input name="lastName" type="text" />
-        </div>
-        <div>
-          <label htmlFor="address">
-            <small>Address</small>
-          </label>
-          <input name="address" type="text" />
-        </div>
-        <div>
-          <label htmlFor="email">
-            <small>Email</small>
-          </label>
-          <input name="email" type="text" />
-        </div>
-        <div>
-          <label htmlFor="password">
-            <small>Password</small>
-          </label>
-          <input name="password" type="password" />
-        </div>
-        <div>
-          <button type="submit">{displayName}</button>
-        </div>
-        {error && error.response && <div> {error.response.data} </div>}
-      </form>
-      <a href="/auth/google">{displayName} with Google</a>
+      <Columns>
+        <Section>
+          <form onSubmit={handleSubmit} name={name}>
+            <div>
+              <label htmlFor="firstName">
+                <small>First Name </small>
+              </label>
+              <input name="firstName" type="text" />
+            </div>
+            <div>
+              <label htmlFor="lastName">
+                <small>Last Name </small>
+              </label>
+              <input name="lastName" type="text" />
+            </div>
+            <div>
+              <label htmlFor="address">
+                <small>Address</small>
+              </label>
+              <input name="address" type="text" />
+            </div>
+            <div>
+              <label htmlFor="email">
+                <small>Email</small>
+              </label>
+              <input name="email" type="text" />
+            </div>
+            <div>
+              <label htmlFor="password">
+                <small>Password</small>
+              </label>
+              <input name="password" type="password" />
+            </div>
+            <div>
+              <Button type="submit" size="small">
+                {displayName}
+              </Button>
+            </div>
+            {error && error.response && <div> {error.response.data} </div>}
+          </form>
+          <a href="/auth/google">{displayName} with Google</a>
+        </Section>
+      </Columns>
     </div>
   ) : (
     <Columns>
-      <div className="authForm">
-        <form onSubmit={handleSubmit} name={name}>
-          <div>
-            <label htmlFor="email">
-              <small>Email</small>
-            </label>
-            <input name="email" type="text" />
-          </div>
-          <div>
-            <label htmlFor="password">
-              <small>Password</small>
-            </label>
-            <input name="password" type="password" />
-          </div>
-          <div>
-            <button type="submit">{displayName}</button>
-          </div>
-          {error && error.response && <div> {error.response.data} </div>}
-        </form>
-        <div>
-          <form method="get" action="/auth/google">
-            <a href="/auth/google">login with Google</a>
+      <Section>
+        <div className="authForm">
+          <form onSubmit={handleSubmit} name={name}>
+            <div>
+              <label htmlFor="email">
+                <small>Email</small>
+              </label>
+              <input name="email" type="text" />
+            </div>
+            <div>
+              <label htmlFor="password">
+                <small>Password</small>
+              </label>
+              <input name="password" type="password" />
+            </div>
+            <div>
+              <Button type="submit" size="small">
+                {displayName}
+              </Button>
+            </div>
+            {error && error.response && <div> {error.response.data} </div>}
           </form>
+          <div>
+            <form method="get" action="/auth/google">
+              <a href="/auth/google">Login with Google</a>
+            </form>
+          </div>
         </div>
-      </div>
+      </Section>
     </Columns>
   )
 }
