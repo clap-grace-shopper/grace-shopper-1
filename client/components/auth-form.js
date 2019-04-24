@@ -52,7 +52,7 @@ const AuthForm = props => {
     </div>
   ) : (
     <Columns>
-      <div>
+      <div className="authForm">
         <form onSubmit={handleSubmit} name={name}>
           <div>
             <label htmlFor="email">
