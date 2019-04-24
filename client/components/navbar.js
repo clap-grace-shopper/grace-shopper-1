@@ -11,7 +11,7 @@ const Navbar = (props, {handleClick, isLoggedIn}) => {
       <Nav color="lightgrey">
         {props && props.isLoggedIn ? (
           !props.user.isAdmin ? (
-            <Nav.Menu>
+            <Nav.Menu active={open}>
               <Nav.Container>
                 <img
                   id="nav"
@@ -50,7 +50,7 @@ const Navbar = (props, {handleClick, isLoggedIn}) => {
             </Nav.Container>
           )
         ) : (
-          <Nav.Menu>
+          <Nav.Menu active={open}>
             <Nav.Container>
               <img
                 id="nav"
