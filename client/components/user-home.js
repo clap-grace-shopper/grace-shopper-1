@@ -20,7 +20,7 @@ class UserHome extends React.Component {
     })
   }
   render() {
-    return (
+    return this.props.username ? (
       <Columns class="userHome" align="center">
         <Columns.Column>
           <Heading> Welcome, {this.props.user.firstName}! </Heading>
@@ -34,6 +34,8 @@ class UserHome extends React.Component {
           </Columns.Column>
         </Columns.Column>
       </Columns>
+    ) : (
+      'Loading...'
     )
   }
 }
