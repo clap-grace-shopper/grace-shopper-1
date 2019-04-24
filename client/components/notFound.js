@@ -6,7 +6,7 @@ export const NotFound = () => {
   return (
     <div>
       <br />
-      <Columns align="center">
+      <Columns align="center" class="notFound">
         <Columns.Column>
           <Heading> Uh! Oh! This place is desserted !!</Heading>
           <Columns.Column>

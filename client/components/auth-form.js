@@ -11,7 +11,7 @@ const AuthForm = props => {
   const {name, displayName, handleSubmit, error} = props
 
   return name === 'signup' ? (
-    <div>
+    <div class="authForm">
       <form onSubmit={handleSubmit} name={name}>
         <div>
           <label htmlFor="firstName">
@@ -52,7 +52,7 @@ const AuthForm = props => {
     </div>
   ) : (
     <Columns>
-      <div>
+      <div className="authForm">
         <form onSubmit={handleSubmit} name={name}>
           <div>
             <label htmlFor="email">

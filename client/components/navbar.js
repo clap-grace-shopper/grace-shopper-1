@@ -7,18 +7,57 @@ import {Navbar as Nav} from 'react-bulma-components/full'
 
 const Navbar = (props, {handleClick, isLoggedIn}) => {
   return (
-    <Nav color="light">
-      {props && props.isLoggedIn ? (
-        !props.user.isAdmin ? (
+    <div>
+      <Nav class="navBar">
+        {props && props.isLoggedIn ? (
+          !props.user.isAdmin ? (
+            <Nav.Menu>
+              <Nav.Container>
+                <img
+                  id="nav"
+                  src="https://banner2.kisspng.com/20180313/czw/kisspng-cupcake-bakery-doughnut-logo-simple-hand-painted-cake-5aa7f4e98069d0.752785361520956649526.jpg"
+                  alt="Clap for Cakes Logo"
+                />
+                <Link to="/home">
+                  <Nav.Item>Home</Nav.Item>
+                </Link>
+                <Link to="/cakes">
+                  <Nav.Item>View Cakes</Nav.Item>
+                </Link>
+              </Nav.Container>
+              <Nav.Container position="end">
+                <Link to="/cart">
+                  <Nav.Item>
+                    <img
+                      id="cart"
+                      src="https://mrhandtruck.com/web/image/product.template/13936/image?unique=8a32a93"
+                    />
+                    View Cart
+                  </Nav.Item>
+                  <Nav.Item>{localStorage.length}</Nav.Item>
+                </Link>
+                <Nav.Item>Hello, {props.user.firstName}</Nav.Item>
+                <Nav.Item onClick={props.handleClick}>Logout</Nav.Item>
+              </Nav.Container>
+            </Nav.Menu>
+          ) : (
+            <Nav.Container position="end">
+              <Nav.Item>Home</Nav.Item>
+              <Link to="/cakes">
+                <Nav.Item>View Cakes</Nav.Item>
+              </Link>
+              <Nav.Item>Admin: {props.user.firstName}</Nav.Item>
+              <Nav.Item onClick={props.handleClick}>Logout</Nav.Item>
+            </Nav.Container>
+          )
+        ) : (
           <Nav.Menu>
             <Nav.Container>
-              <img
-                id="nav"
-                src="https://banner2.kisspng.com/20180313/czw/kisspng-cupcake-bakery-doughnut-logo-simple-hand-painted-cake-5aa7f4e98069d0.752785361520956649526.jpg"
-                alt="Clap for Cakes Logo"
-              />
-              <Link to="/home">
-                <Nav.Item>Home</Nav.Item>
+              <Link to="/login">
+                <Nav.Item>Login</Nav.Item>
+              </Link>
+              <Link to="/signup">
+                <Nav.Item>Sign Up</Nav.Item>
               </Link>
               <Link to="/cakes">
                 <Nav.Item>View Cakes</Nav.Item>
@@ -33,52 +72,15 @@ const Navbar = (props, {handleClick, isLoggedIn}) => {
                   />
                   View Cart
                 </Nav.Item>
-                <Nav.Item>{localStorage.length}</Nav.Item>
               </Link>
-              <Nav.Item>Hello, {props.user.firstName}</Nav.Item>
-              <Nav.Item onClick={props.handleClick}>Logout</Nav.Item>
+              <Nav.Item>{localStorage.length}</Nav.Item>
+              <Nav.Item>Hello, Guest</Nav.Item>
             </Nav.Container>
           </Nav.Menu>
-        ) : (
-          <Nav.Container position="end">
-            <Nav.Item>Home</Nav.Item>
-            <Link to="/cakes">
-              <Nav.Item>View Cakes</Nav.Item>
-            </Link>
-            <Nav.Item>Admin: {props.user.firstName}</Nav.Item>
-            <Nav.Item onClick={props.handleClick}>Logout</Nav.Item>
-          </Nav.Container>
-        )
-      ) : (
-        <Nav.Menu>
-          <Nav.Container>
-            <Link to="/login">
-              <Nav.Item>Login</Nav.Item>
-            </Link>
-            <Link to="/signup">
-              <Nav.Item>Sign Up</Nav.Item>
-            </Link>
-            <Link to="/cakes">
-              <Nav.Item>View Cakes</Nav.Item>
-            </Link>
-          </Nav.Container>
-          <Nav.Container position="end">
-            <Link to="/cart">
-              <Nav.Item>
-                <img
-                  id="cart"
-                  src="https://mrhandtruck.com/web/image/product.template/13936/image?unique=8a32a93"
-                />
-                View Cart
-              </Nav.Item>
-            </Link>
-            <Nav.Item>{localStorage.length}</Nav.Item>
-            <Nav.Item>Hello, Guest</Nav.Item>
-          </Nav.Container>
-        </Nav.Menu>
-      )}
-      <hr />
-    </Nav>
+        )}
+        <hr />
+      </Nav>
+    </div>
   )
 }
 

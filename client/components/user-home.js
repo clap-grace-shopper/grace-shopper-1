@@ -21,7 +21,7 @@ class UserHome extends React.Component {
   }
   render() {
     return (
-      <Columns align="center">
+      <Columns class="userHome" align="center">
         <Columns.Column>
           <Heading> Welcome, {this.props.user.firstName}! </Heading>
           <Columns.Column>
